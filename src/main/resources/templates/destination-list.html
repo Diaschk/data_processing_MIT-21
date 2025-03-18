@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог туристичних місць</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="container mt-4">
+<h2 class="text-center">Каталог туристичних місць</h2>
+<a href="/destinations/add" class="btn btn-primary mb-3">+ Додати туристичне місце</a>
+
+<table class="table table-striped text-center">
+    <thead>
+    <tr>
+        <th>Зображення</th>
+        <th>Назва</th>
+        <th>Опис</th>
+        <th>Дії</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="destination : ${destinations}">
+        <td>
+            <img th:src="${destination.imageUrl}" alt="Зображення" class="destination-img" style="width: 100px;">
+        </td>
+        <td th:text="${destination.name}"></td>
+        <td th:text="${destination.description}"></td>
+        <td>
+            <a th:href="@{/destinations/edit/{id}(id=${destination.id})}" class="btn btn-warning">Редагувати</a>
+
+            <a th:href="@{/destinations/delete/{id}(id=${destination.id})}" class="btn btn-danger">
+                Видалити
+            </a>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

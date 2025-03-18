@@ -1,6 +1,7 @@
-package com.example.model;
+package com.example.catalog.model;
 
 import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "destinations")
@@ -43,13 +44,5 @@ public class Destination {
 
     public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
 
-    @Override
-    public String toString() {
-        return "Destination{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
-    }
+
 }
