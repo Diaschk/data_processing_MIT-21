@@ -1,7 +1,7 @@
-package controller;
+package com.example.catalog.controller;
 
-import model.Destination;
-import repository.DestinationRepository;
+import com.example.catalog.model.Destination;
+import com.example.catalog.repository.DestinationRepository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
