@@ -32,7 +32,7 @@ public class JwtFilter extends OncePerRequestFilter {
         final String jwt;
         final String username;
 
-        // Перевірка наявності заголовка Bearer
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response); // Неавторизований запит
             return;
@@ -59,6 +59,6 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
 
-        filterChain.doFilter(request, response); // Продовжити виконання запиту
+        filterChain.doFilter(request, response);
     }
 }

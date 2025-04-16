@@ -11,7 +11,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info().title("Destination Catalog API")
                         .version("1.0")
-                        .description("Документація API для управління туристичними місцями"));
+                        .description("Документація API для управління туристичними місцями з авторизацією"));
     }
 }
 
