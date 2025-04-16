@@ -1,6 +1,6 @@
 package com.example.catalog.config;
 
-import com.example.catalog.service.JwtFilter;
+import com.example.catalog.config.JwtFilter;
 import com.example.catalog.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -59,4 +59,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+
 }
