@@ -34,47 +34,47 @@ public class JwtFilter extends OncePerRequestFilter {
         final String jwt;
         final String username;
 
-        // Якщо заголовок Authorization відсутній або не починається з "Bearer ", пропускаємо фільтрацію
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // Витягуємо токен з заголовку
+
         jwt = authHeader.substring(7);
         username = jwtService.extractUsername(jwt);
 
-        // Якщо ім'я користувача є, але аутентифікація ще не виконана
+
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
-                // Завантажуємо користувача
+
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                // Перевіряємо валідність токена
+
                 if (jwtService.isTokenValid(jwt, userDetails.getUsername())) {
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                    // Встановлюємо аутентифікацію в контекст
+
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                     log.info("✅ JWT авторизація успішна для користувача: {}", username);
                 } else {
-                    // Якщо токен недійсний, повертаємо 401
+
                     log.warn("❌ Недійсний токен для користувача: {}", username);
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired JWT token");
                     return;
                 }
             } catch (Exception e) {
-                // Якщо сталася помилка, повертаємо 401
+
                 log.error("❌ Помилка при обробці JWT токена: {}", e.getMessage());
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired JWT token");
                 return;
             }
         }
 
-        // Продовжуємо фільтрацію
+
         filterChain.doFilter(request, response);
     }
 }
