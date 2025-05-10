@@ -7,10 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation .*;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 
 import java.util.List;
 
 @Slf4j
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/destinations")
@@ -18,6 +21,7 @@ public class DestinationController {
     private final DestinationRepository destinationRepository;
 
     @Operation(summary = "Отримати всі туристичні місця")
+
     @GetMapping
     public List<Destination> getAllDestinations() {
         log.info("GET /api/destinations - отримати всі туристичні місця");
